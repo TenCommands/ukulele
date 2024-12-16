@@ -20,14 +20,14 @@ class MidiHandler:
         notes = []
     
         for chord in chord_progression:
-            if chord == 'REST':
-                notes.append('REST')
+            if chord == ' ':
+                notes.append(' ')
             else:
                 notes.append(chords.from_shorthand(chord)[0])
 
         note_numbers = []
         for note in notes:
-            if note == 'REST':
+            if note == ' ':
                 note_numbers.append(-1)  # Represent REST with -1
             else:
                 note_numbers.append(note_to_number(note, self.octave))
@@ -48,10 +48,8 @@ class MidiHandler:
                 if line.strip() and not line.startswith('Title:') and not line.startswith('Credits:'):
                     parts = line.strip().split()
                     for part in parts:
-                        if part in ['G', 'Am', 'D', 'Em', 'C']:
+                        if part in ['G', 'Am', 'D', 'Em', 'C', ' ']:
                             chords.append(part)
-                        elif part.isspace() or part == ' ':
-                            chords.append('REST')
         return chords
 
     def save(self, filename="output.mid"):

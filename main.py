@@ -4,8 +4,9 @@ import os
 # Example usage
 def create_song():
     # Create MIDI
-    midi = MidiHandler(measures_per_second=2, volume=100, octave=5)
+    midi = MidiHandler(measures_per_second=0.5, volume=100, octave=5)
     chord_progression = midi.extract_chords_from_txt("Breaking Through to You.txt")
+    print(chord_progression)
     midi.create_from_progression(chord_progression)
     midi.save("output.mid")
     
